@@ -30,7 +30,7 @@ async def login(user_credentials: OAuth2PasswordRequestForm = Depends(), db: Ses
     return {"access_token": access_token, "token_type": "bearer"}
 
 
-@router.get("/talent-users", response_model=schemas.TalentProperUserResponse)
+@router.get("/talent-users", response_model=List[schemas.TalentProperUserResponse])
 def get_users(db:Session = Depends(get_db), current_user: str=Depends(oauth2.get_current_user),limit: int = 3, skip: int = 0, search: Optional[str] = ""):
     if not current_user.is_authenticated:
         raise HTTPException(
