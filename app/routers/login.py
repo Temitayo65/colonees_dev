@@ -31,7 +31,12 @@ async def login(user_credentials: OAuth2PasswordRequestForm = Depends(), db: Ses
 
 
 @router.get("/talent-users")
-def get_users(db:Session = Depends(get_db), get_current_user: str=Depends(oauth2.get_current_user),limit: int = 3, skip: int = 0, search: Optional[str] = ""):
+def get_users(db:Session = Depends(get_db), current_user: str=Depends(oauth2.get_current_user),limit: int = 3, skip: int = 0, search: Optional[str] = ""):
+    if not current_user.is_authenticated:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Authentication required"
+        )
     users = db.query(models.TalentUser).filter(models.TalentUser.role.contains(search)).limit(limit).offset(skip).all()
     [user.__dict__.pop("password") for user in users] # this gets each dictionary from the "users" table and removes the password before returning the response 
     return users # this does not contain the passwords
