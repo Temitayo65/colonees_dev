@@ -52,7 +52,7 @@ async def create_talent_user(user: schemas.TalentProperUserCreate, db: Session =
         db.add(user_table_addition)
         db.commit()
         db.refresh(user_table_addition)
-        return {"message": " successfully joined business list"}
+        return {"message": " successfully joined talent list"}
     
     except sqlalchemy.exc.IntegrityError as e:
         db.rollback()
