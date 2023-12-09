@@ -76,6 +76,7 @@ class Token(BaseModel):
 
 class TokenData(BaseModel):
     email: str 
+    is_authenticated: bool 
 
 
 
