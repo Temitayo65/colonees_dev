@@ -20,11 +20,12 @@ async def join_talent_waitlist(user: schemas.TalentWaitListUserCreate, db: Sessi
         db.add(talent_waitlist_user)
         db.commit()
         db.refresh(talent_waitlist_user)
-        return {"message": " successfully joined talent waitlist"}
     
     except sqlalchemy.exc.IntegrityError as e:
         db.rollback()
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Internal server error")
+    
+    return {"message": " successfully joined talent waitlist"}
 
 @router.post("/users/join-talent", status_code=status.HTTP_201_CREATED, tags=["Join"])
 async def create_talent_user(user: schemas.TalentProperUserCreate, db: Session =Depends(get_db)):
