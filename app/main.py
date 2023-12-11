@@ -10,15 +10,16 @@ from pathlib import Path
 
 
 
-models.Base.metadata.create_all(bind=engine)
+# models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-# pointing to the template folder for HTML Repsonse
-templates = Jinja2Templates(
-    directory="templates")
 
-origins = ["*"] # put only http://www.colonees.com here 
+# put only http://www.colonees.com here
+origins = ["https://api.colonees.com/",
+           "https://colonees.com",
+           "https://coloneesdevelopment-6c6846f843de.herokuapp.com/"
+           ]
 
 app.add_middleware(
     CORSMiddleware,
