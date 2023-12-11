@@ -91,6 +91,10 @@ class UserResponse(BaseModel):
         from_attributes = True 
 
 
+class UserRegistration(BaseModel):
+    username: str
+    email: EmailStr
+
 
 
 
