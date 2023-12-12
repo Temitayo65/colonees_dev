@@ -1,5 +1,5 @@
 from fastapi.responses import HTMLResponse
-from .routers import business, login,talent, subscribe
+from .routers import business, login,talent, subscribe, admin
 from . import models
 from fastapi import FastAPI
 from .database import engine
@@ -74,6 +74,7 @@ app.include_router(subscribe.router)
 app.include_router(business.router)
 app.include_router(talent.router)
 app.include_router(login.router)
+app.include_router(admin.router)
 
 
 
