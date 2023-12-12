@@ -10,7 +10,7 @@ router = APIRouter(
     prefix="/api"
 )
 
-@router.post("/talent-waitlist", status_code=status.HTTP_201_CREATED, tags=["WaitList"])
+@router.post("/talent-waitlist", status_code=status.HTTP_201_CREATED, tags=["Join WaitList"])
 async def join_talent_waitlist(user: schemas.TalentWaitListUserCreate, db: Session =Depends(get_db)):
     existing_user = db.query(models.TalentWaitlistUser).filter(models.TalentWaitlistUser.email == user.email).first()
     if existing_user:
@@ -27,7 +27,7 @@ async def join_talent_waitlist(user: schemas.TalentWaitListUserCreate, db: Sessi
     
     return {"message": " successfully joined talent waitlist"}
 
-@router.post("/users/join-talent", status_code=status.HTTP_201_CREATED, tags=["Join"])
+@router.post("/users/join-talent", status_code=status.HTTP_201_CREATED, tags=["Join Users"])
 async def create_talent_user(user: schemas.TalentProperUserCreate, db: Session =Depends(get_db)):
     existing_user = db.query(models.User).filter(models.User.email == user.email).first()
     if existing_user:
