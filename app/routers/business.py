@@ -10,7 +10,7 @@ router = APIRouter(
     prefix="/api"
 )
 
-@router.post("/business-waitlist", status_code=status.HTTP_201_CREATED, tags=["WaitList"])
+@router.post("/business-waitlist", status_code=status.HTTP_201_CREATED, tags=["Join WaitList"])
 async def join_business_waitlist(user: schemas.BusinessWaitListUserCreate, db: Session =Depends(get_db)):
     existing_user = db.query(models.BusinessWaitlistUser).filter(models.BusinessWaitlistUser.email == user.email).first()
     if existing_user:
@@ -30,7 +30,7 @@ async def join_business_waitlist(user: schemas.BusinessWaitListUserCreate, db: S
 
 
 
-@router.post("/users/join-business", status_code=status.HTTP_201_CREATED, tags=["Join"])
+@router.post("/users/join-business", status_code=status.HTTP_201_CREATED, tags=["Join Users"])
 async def create_business_user(user: schemas.BusinessProperUserCreate, db: Session =Depends(get_db)):
     existing_user = db.query(models.BusinessUser).filter(models.BusinessUser.email == user.email).first()
     if existing_user:
