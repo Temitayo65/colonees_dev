@@ -59,4 +59,9 @@ class Subscriber(Base):
     created_at = Column(TIMESTAMP(timezone=True), nullable=False, server_default=text('now()'))
     
 
-
+class AdminUser(Base):
+    __tablename__ = "administrators"
+    email = Column(String, primary_key=True, nullable=False, unique=True)
+    password = Column(String, nullable=False)
+    is_master = Column(Boolean, default=False, nullable=False)
+    created_at = Column(TIMESTAMP(timezone=True), nullable=False, server_default=text('now()'))
