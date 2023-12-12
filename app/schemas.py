@@ -96,6 +96,13 @@ class UserRegistration(BaseModel):
     email: EmailStr
 
 
+class AdminUser(BaseModel):
+    email: EmailStr
+    password: str 
+    is_master: bool 
+
+
+
 
 
 
