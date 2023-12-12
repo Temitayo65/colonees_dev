@@ -7,7 +7,7 @@ from fastapi.params import Depends
 
 router = APIRouter(
     prefix="/api",
-    tags=["Subscribe"]
+    tags=["Subscribe Only"]
 )
 
 # For joining the initial subscription table 
