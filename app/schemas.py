@@ -81,7 +81,6 @@ class TokenData(BaseModel):
 
 
 class UserResponse(BaseModel):
-    id : int 
     email : str
     is_talent : bool
     is_business : bool
@@ -99,7 +98,7 @@ class UserRegistration(BaseModel):
 class AdminUser(BaseModel):
     email: EmailStr
     password: str 
-    is_master: bool 
+    is_master: bool
 
 
 
