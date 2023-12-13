@@ -13,7 +13,7 @@ router = APIRouter(
     prefix="/admin-user"
 )
 
-@router.post("/login", response_model=schemas.AdminUser)
+@router.post("/login", response_model=schemas.Token)
 async def login(admin_user_credentials: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
     user = db.query(models.AdminUser).filter(
         models.AdminUser.email == admin_user_credentials.username).first()
