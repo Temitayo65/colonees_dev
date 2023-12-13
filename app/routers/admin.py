@@ -32,14 +32,23 @@ async def login(admin_user_credentials: OAuth2PasswordRequestForm = Depends(), d
 
 
 @router.get("/all-users", response_model=List[schemas.UserResponse])
-def get_all_users(db: Session = Depends(get_db), current_user: str = Depends(oauth2.get_current_user), limit: int = 3, skip: int = 0, search: Optional[str] = ""):
+def get_all_users(db: Session = Depends(get_db), current_user: str = Depends(oauth2.get_current_user)):
     if not current_user.is_authenticated:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Authentication required"
         )
-    users = db.query(models.User).filter(
-        models.User.contains(search)).limit(limit).offset(skip).all()
+    users = db.query(models.User).all()
+    [user.__dict__.pop("password") for user in users] # removes password from users 
+    all_users = [
+        schemas.UserResponse(
+            email=user.email,
+            is_talent=user.is_talent,
+            is_business=user.is_business,
+            subscribed=user.subscribed
+        )
+        for user in users
+    ]
 
-    return users  
+    return all_users  
 
