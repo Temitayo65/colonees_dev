@@ -12,7 +12,6 @@ Colonees AI API is a revolutionary project designed to simplify team building th
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [Pull Request Template](#pull-request-template)
-- [Code of Conduct](#code-of-conduct)
 
 ## Installation
 
