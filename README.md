@@ -20,7 +20,7 @@ Clone the repository to your local machine and navigate to the project directory
 
 ```bash
 pip install -r requirements.txt
-
+```
 
 ## Configuration
 
@@ -38,7 +38,7 @@ SECRET_KEY=your_secret_key
 ALGORITHM=HS256
 # Set the expiration time in minutes
 ACCESS_TOKEN_EXPIRATION_TIME=15  # 15 minutes
-
+```
 
 
 ## Database Setup (Heroku)
@@ -50,7 +50,7 @@ Run the following command to apply database migrations:
 
 ```bash
 heroku run alembic upgrade head --app your-heroku-app-name
-
+```
 
 ## Usage
 
@@ -66,12 +66,10 @@ Navigate to the documentation endpoint:
 
 ```bash
 https://your-api-url/docs
-
+```
 
 ### Contributing
 
-```markdown
-# Colonees AI API
 
 ## Contributing
 
@@ -124,7 +122,7 @@ We welcome contributions from the community to enhance and improve the Colonees 
 
 When submitting a pull request, use the following template:
 
-```markdown
+
 ## Description
 
 Provide a clear and concise description of the changes introduced by this pull request.
