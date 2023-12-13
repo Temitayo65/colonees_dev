@@ -81,7 +81,7 @@ We welcome contributions from the community to enhance and improve the Colonees 
 2. **Clone Your Fork:** Clone your forked repository to your local machine. Use the following command, replacing `<your-username>` with your GitHub username:
 
     ```bash
-    git clone https://github.com/<your-username>/colonees-ai-api.git
+    git clone https://github.com/<your-username>/Colonees/api.git
     ```
 
 3. **Create a Branch:** Create a new branch for your feature or bug fix. Use a descriptive name for your branch:
