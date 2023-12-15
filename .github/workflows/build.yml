@@ -1,6 +1,9 @@
 name: Api Build CI/CD
 
-on: [push]
+on:
+  push:
+    branches-ignore:
+      - main
 
 jobs:
   build:
