@@ -1,4 +1,4 @@
-name: Api CI/CD
+name: Api Build CI/CD
 
 on: [push]
 
@@ -19,16 +19,4 @@ jobs:
        - name: Error check
          run: mypy --ignore-missing-imports --disable-error-code "annotation-unchecked" --disable-error-code "attr-defined" --disable-error-code "unused-ignore" --disable-error-code "var-annotated" --disable-error-code "arg-type" --disable-error-code "assignment" --disable-error-code "misc" --disable-error-code "valid-type"  --disable-error-code "call-arg" app
 
-  heroku-deployment:
-    runs-on: ubuntu-latest
-    needs: [build]
-      
-    steps:
-       - name: Get actions
-         uses: actions/checkout@v3
-       - name: deploying to heroku
-         uses: akhileshns/heroku-deploy@v3.12.13 
-         with:
-           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-           heroku_app_name: ${{secrets.APP_NAME}} 
-           heroku_email: ${{secrets.HEROKU_EMAIL}}
+  
