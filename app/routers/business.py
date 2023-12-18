@@ -4,6 +4,7 @@ from fastapi.params import Depends
 from ..database import get_db
 from sqlalchemy.orm import Session 
 from fastapi import APIRouter,status, HTTPException
+from ..mails import send_email,static_html_for_waitlist
 
 
 router = APIRouter(
@@ -20,6 +21,7 @@ async def join_business_waitlist(user: schemas.BusinessWaitListUserCreate, db: S
         db.add(business_waitlist_user)
         db.commit()
         db.refresh(business_waitlist_user)
+        send_email(to_email=business_waitlist_user.email, subject="Colonees Waitlist", message=static_html_for_waitlist(), html=True)
         return {"message": " successfully joined business waitlist"}
     except sqlalchemy.exc.IntegrityError as e:
         db.rollback()
