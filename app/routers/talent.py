@@ -4,6 +4,7 @@ from .. import schemas, models, utils
 from fastapi.params import Depends
 from ..database import  get_db
 from sqlalchemy.orm import Session 
+from ..mails import send_email, static_html_for_waitlist
 
 
 router = APIRouter(
@@ -19,12 +20,13 @@ async def join_talent_waitlist(user: schemas.TalentWaitListUserCreate, db: Sessi
         talent_waitlist_user = models.TalentWaitlistUser(**user.model_dump())
         db.add(talent_waitlist_user)
         db.commit()
-        db.refresh(talent_waitlist_user)
-    
+        db.refresh(talent_waitlist_user) 
+
     except sqlalchemy.exc.IntegrityError as e:
         db.rollback()
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Internal server error")
     
+    send_email(to_email=talent_waitlist_user.email, subject="Colonees Waitlist", message=static_html_for_waitlist(), html=True)
     return {"message": " successfully joined talent waitlist"}
 
 @router.post("/users/join-talent", status_code=status.HTTP_201_CREATED, tags=["Join Users"])
@@ -61,4 +63,3 @@ async def create_talent_user(user: schemas.TalentProperUserCreate, db: Session =
             raise HTTPException(status_code=status.HTTP_302_FOUND, detail=f"{user.business_name} is already on the business list")
         else:
             raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Internal server error")
-
