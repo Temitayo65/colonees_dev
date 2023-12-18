@@ -37,6 +37,15 @@ SECRET_KEY=your_secret_key
 ALGORITHM=HS256
 # Set the expiration time in minutes
 ACCESS_TOKEN_EXPIRATION_TIME=15  # 15 minutes
+
+
+ZOHO_SMTP_SENDER_EMAIL = admin@example.com
+ZOHO_SMTP_USERNAME = admin@example.com
+ZOHO_SMTP_OUTGOING_SERVER_NAME = admin@example.com
+ZOHO_SMTP_PASSWORD = zoho_smtp_password
+ZOHO_SMTP_PORT_WITH_SSL = ssl_port
+ZOHO_SMTP_PORT_WITH_TLS = tsl_port
+ZOHO_SMTP_REQUIRE_AUTHENTICATION = Yes
 ```
 
 
