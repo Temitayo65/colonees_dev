@@ -14,7 +14,18 @@ class Settings(BaseSettings):
     admin_email: str 
     admin_password: str 
 
+    zoho_smtp_sender_email: str 
+    zoho_smtp_username: str 
+    zoho_smtp_outgoing_server_name: str 
+    zoho_smtp_password: str 
+    zoho_smtp_port_with_tls: int 
+    zoho_smtp_port_with_ssl: int 
+    zoho_smtp_require_authentication: str 
+
+
+
     class Config:
         env_file = ".env"
 
 settings = Settings()
+
