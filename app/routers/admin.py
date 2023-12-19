@@ -71,26 +71,25 @@ async def give_admin_rights(newAdminUser: schemas.AdminUser, current_user: str =
     # check to see if the current user is a master Admin user(check this state in the database)
     is_master_user = db.query(models.AdminUser).filter(models.AdminUser.email == current_user.email).first()
     
-    if is_master_user != None: 
-        if is_master_user.is_master:
-            # add to admin table
-            try:
-                user = models.AdminUser(**newAdminUser.model_dump())
-                user.password = utils.hash(newAdminUser.password)
-                db.add(user)
-                db.commit()
-                db.refresh(user)
-                return {"message": f"user with email: {user.email}, successfully added as Admin"}
-            
-            except sqlalchemy.exc.IntegrityError as e:
-                db.rollback()
-                if "duplicate key" in str(e):
-                    raise HTTPException(status_code=status.HTTP_302_FOUND,
-                                        detail=f"{user.business_name} is already an Admin")
-                else:
-                    raise HTTPException(
-                        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Internal server error")
+    
+    if is_master_user and is_master_user.is_master:
+        # add to admin table
+        try:
+            user = models.AdminUser(**newAdminUser.model_dump())
+            user.password = utils.hash(newAdminUser.password)
+            db.add(user)
+            db.commit()
+            db.refresh(user)
+            return {"message": f"user with email: {user.email}, successfully added as Admin"}
+        
+        except sqlalchemy.exc.IntegrityError as e:
+            db.rollback()
+            if "duplicate key" in str(e):
+                raise HTTPException(status_code=status.HTTP_302_FOUND,
+                                    detail=f"{user.business_name} is already an Admin")
+            else:
+                raise HTTPException(
+                    status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Internal server error")
 
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=f"Only master admins can make others admin")
-    else:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"This user is not an admin user")
+    raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=f"Only master admins can make others admin")
+    
