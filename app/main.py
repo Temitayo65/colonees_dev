@@ -15,11 +15,9 @@ from pathlib import Path
 app = FastAPI()
 
 
-# put only http://www.colonees.com here
-origins = ["https://api.colonees.com/",
-           "https://colonees.com",
-           "https://coloneesdevelopment-6c6846f843de.herokuapp.com/"
-           ]
+# put only https://www.colonees.com here
+origins = ["https://api.colonees.com",
+           "https://www.colonees.com"]
 
 app.add_middleware(
     CORSMiddleware,
