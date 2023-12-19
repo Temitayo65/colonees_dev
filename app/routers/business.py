@@ -15,7 +15,7 @@ router = APIRouter(
 async def join_business_waitlist(user: schemas.BusinessWaitListUserCreate, db: Session =Depends(get_db)):
     existing_user = db.query(models.BusinessWaitlistUser).filter(models.BusinessWaitlistUser.email == user.email).first()
     if existing_user:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=f"User with email: {user.email} already exists")
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=f"User with email: {user.email} already exists" )
     try:
         business_waitlist_user = models.BusinessWaitlistUser(**user.model_dump())
         db.add(business_waitlist_user)
