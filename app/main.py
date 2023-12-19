@@ -17,7 +17,7 @@ app = FastAPI()
 
 # put only http://www.colonees.com here
 origins = ["https://api.colonees.com/",
-           "https://colonees.com",
+           "https://www.colonees.com",
            "https://coloneesdevelopment-6c6846f843de.herokuapp.com/"
            ]
 
