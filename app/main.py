@@ -17,7 +17,8 @@ app = FastAPI()
 
 # put only https://www.colonees.com here
 origins = ["https://api.colonees.com",
-           "https://www.colonees.com"]
+           "https://www.colonees.com",
+           "https://colonees.com",]
 
 app.add_middleware(
     CORSMiddleware,
