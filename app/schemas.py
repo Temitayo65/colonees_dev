@@ -8,14 +8,14 @@ class BusinessWaitListUserCreate(BaseModel):
     full_name : str
     business_name : str
     business_industry: str 
-    subscribed : bool
+    subscribed : Optional[bool] = False
 
 class TalentWaitListUserCreate(BaseModel):
     email: EmailStr
     full_name : str
     industry : str
     designation : str
-    subscribed : bool
+    subscribed: Optional[bool] = False
 
 class SubsriberUserCreate(BaseModel):
     email: EmailStr
