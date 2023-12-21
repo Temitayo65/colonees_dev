@@ -18,13 +18,13 @@ app = FastAPI()
 # put only https://www.colonees.com here
 origins = ["https://api.colonees.com",
            "https://www.colonees.com",
-           "https://colonees.com",]
+           "https://colonees.com"]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins= ["*"],
+    allow_origins= origins,
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["POST", "GET", "OPTIONS"],
     allow_headers=["*"],
 )
 
