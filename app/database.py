@@ -8,7 +8,7 @@ from . import utils, models
 
 
 SQLALCHEMY_DATABASE_URL = f'postgresql://{settings.database_username}:{settings.database_password}@{settings.database_hostname}:{settings.database_port}/{settings.database_name}'
-engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={'sslmode':'require'},echo=True,)
+engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={'ssl_context': True},echo=True,)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
